@@ -1,102 +1,102 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Management;
 
 public class GunShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;   // Préfabriqué de la balle
+    public GameObject bulletPrefab;   // PrÃ©fabriquÃ© de la balle
     public Transform bulletSpawn;     // Position de spawn de la balle
     public float shootingForce = 1000f; // Force de propulsion de la balle
     public float fireRate = 0.2f;     // Temps entre deux tirs (en secondes)
-    public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable; // Le composant XRGrabInteractable attaché au pistolet
-    public ParticleSystem muzzle;   // tir de la bouche de feu
+    public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
+    public ParticleSystem muzzle;   // Ancien systÃ¨me, devenu inutile mais je te le laisse pour Ã©viter des erreurs si tu veux lâ€™enlever plus tard
 
-    private XRInputActions inputActions; // Référence aux InputActions générés
-    private bool isShooting = false;    // Détecter si le joueur tire
-    private float nextFireTime = 0f;    // Temps pour le prochain tir
-    private bool isGunHeld = false;     // Détecter si le pistolet est saisi
+    private XRInputActions inputActions;
+    private bool isShooting = false;
+    private float nextFireTime = 0f;
+    private bool isGunHeld = false;
 
     void Awake()
     {
-        // Initialiser les Input Actions
         inputActions = new XRInputActions();
     }
 
     void OnEnable()
     {
-        // Activer les Input Actions
         inputActions.XRControls.Enable();
 
-        // Lier les événements de tir aux actions de la gâchette
         inputActions.XRControls.Shoot.started += OnShootStart;
         inputActions.XRControls.Shoot.canceled += OnShootStop;
 
-        // Lier les événements de grab et release du pistolet
         grabInteractable.selectEntered.AddListener(OnGrab);
         grabInteractable.selectExited.AddListener(OnRelease);
     }
 
     void OnDisable()
     {
-        // Désactiver les Input Actions
         inputActions.XRControls.Disable();
 
-        // Désabonner les événements de tir
         inputActions.XRControls.Shoot.started -= OnShootStart;
         inputActions.XRControls.Shoot.canceled -= OnShootStop;
 
-        // Désabonner les événements de grab et release
         grabInteractable.selectEntered.RemoveListener(OnGrab);
         grabInteractable.selectExited.RemoveListener(OnRelease);
     }
 
     void Update()
     {
-        // Vérifier si le pistolet est tenu et si le joueur est en train de tirer
         if (isGunHeld && isShooting && Time.time >= nextFireTime)
         {
-            Debug.Log("Tir effectué !");
             Shoot();
             nextFireTime = Time.time + fireRate;
-            // Calculer le temps pour le prochain tir
         }
     }
 
-
     void OnShootStart(InputAction.CallbackContext context)
     {
-        // Le joueur commence à tirer
         isShooting = true;
     }
 
     void OnShootStop(InputAction.CallbackContext context)
     {
-        // Le joueur arrête de tirer
         isShooting = false;
     }
 
     void OnGrab(SelectEnterEventArgs args)
     {
         isGunHeld = true;
-        Debug.Log("Pistolet saisi !");
     }
 
     void OnRelease(SelectExitEventArgs args)
     {
         isGunHeld = false;
-        Debug.Log("Pistolet lâché !");
     }
-
 
     void Shoot()
     {
-        // Créer la balle à la position de spawn
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        muzzle.Play(); 
+        // ðŸ”¥ RÃ©cupÃ©rer une balle du pool
+        GameObject bullet = BulletPool.Instance.GetBullet();
 
-        // Appliquer une force à la balle pour simuler le tir
+        // Reset & repositionnement
+        bullet.transform.position = bulletSpawn.position;
+        bullet.transform.rotation = bulletSpawn.rotation;
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        bullet.SetActive(true);
+
+        // ðŸ”¥ FX Addressables (PCVR ou Quest automatiquement)
+        Instantiate(
+            FXLoader.Instance.GetMuzzleFX(),
+            bulletSpawn.position,
+            bulletSpawn.rotation,
+            bulletSpawn  // permet au FX de suivre le mouvement du canon
+        );
+
+        // Force de tir
         rb.AddForce(bulletSpawn.forward * shootingForce);
     }
-
 }

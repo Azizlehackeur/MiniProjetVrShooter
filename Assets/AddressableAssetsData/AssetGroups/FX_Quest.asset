@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FX_Quest
+  m_EditorClassIdentifier: 
+  m_GroupName: FX_Quest
+  m_GUID: 344fa927416b40048b3aa6de2da637de
+  m_SerializeEntries:
+  - m_GUID: 7096a55d3e5a8d3459f5a08facc3a077
+    m_Address: Muzzle_Quest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 918916791099bd949a61e9c908aa0077
+    m_Address: Impact_Quest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d04429596278ea7469734a9363fc84bd
+    m_Address: Gun_Quest
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a8bfd71bef87ab749ac87ea0bd2b00b1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bc5b40e112728e740b14403be35de714, type: 2}
+    - {fileID: 11400000, guid: 2f144733552788d4f9873d1ad7b8e63d, type: 2}

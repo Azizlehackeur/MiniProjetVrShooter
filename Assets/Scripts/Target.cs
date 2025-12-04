@@ -1,20 +1,27 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public GameObject particleEffectPrefab;  // Prefab de l'effet de particules (explosion, fumée, etc.)
-    public float destroyDelay = 0.5f;        // Délai avant de détruire la cible (en secondes)
+    public float destroyDelay = 0.5f; // dÃ©lai avant de dÃ©sactiver la cible
 
     void OnCollisionEnter(Collision collision)
     {
-        // Vérifier si l'objet entrant est une balle
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            // Déclencher l'effet de particules à l'endroit où la cible a été touchée
-            Instantiate(particleEffectPrefab, transform.position, Quaternion.identity);
+            // FX d'impact via Addressables : PCVR ou Quest automatiquement
+            Instantiate(
+                FXLoader.Instance.GetImpactFX(),
+                transform.position,
+                Quaternion.identity
+            );
 
-            // Détruire la cible avec un délai pour permettre aux particules de se jouer
-            Destroy(gameObject, destroyDelay);
+            // DÃ©sactiver la cible aprÃ¨s un dÃ©lai (pooling)
+            Invoke(nameof(DisableTarget), destroyDelay);
         }
+    }
+
+    void DisableTarget()
+    {
+        TargetPool.Instance.ReturnTarget(gameObject);
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6651367885323917184}
   - component: {fileID: 5304179764568525242}
   - component: {fileID: 5661159122669362364}
+  - component: {fileID: -4013883647067181254}
   m_Layer: 0
   m_Name: Balle
   m_TagString: Bullet
@@ -60,6 +61,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -133,3 +137,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4013883647067181254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2628832455161392507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accb8f32f60315941816e4c12161cfbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3

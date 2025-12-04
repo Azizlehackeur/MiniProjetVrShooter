@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: FX_PCVR
+  m_EditorClassIdentifier: 
+  m_GroupName: FX_PCVR
+  m_GUID: a6bf3f19110380346ab8692ec7abdfbb
+  m_SerializeEntries:
+  - m_GUID: 5eb2b463e0f7f044882326439a0dfec1
+    m_Address: Gun_PCVR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86ef97f423f04194799d6211c73b1693
+    m_Address: Muzzle_PCVR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 988337028211c3b4bb1444411d776adf
+    m_Address: Impact_PCVR
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a8bfd71bef87ab749ac87ea0bd2b00b1, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1d249510a9009f442b280d914324e935, type: 2}
+    - {fileID: 11400000, guid: bb41a1f4839c4fe4a9a141dde3be62fd, type: 2}
