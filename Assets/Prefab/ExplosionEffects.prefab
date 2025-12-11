@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2070721283086634756}
   - component: {fileID: 1564563493498144083}
   - component: {fileID: 4842892339990777825}
+  - component: {fileID: 5456302372766689338}
   m_Layer: 0
   m_Name: ExplosionEffects
   m_TagString: Untagged
@@ -4774,6 +4775,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4830,3 +4834,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5456302372766689338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970095668271959292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15de9ae8b9386f4ea790e76b1e8559c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 1

@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Management;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class GunShooting : MonoBehaviour
 {
-    public GameObject bulletPrefab;   // Préfabriqué de la balle
-    public Transform bulletSpawn;     // Position de spawn de la balle
-    public float shootingForce = 1000f; // Force de propulsion de la balle
-    public float fireRate = 0.2f;     // Temps entre deux tirs (en secondes)
-    public UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable;
-    public ParticleSystem muzzle;   // Ancien système, devenu inutile mais je te le laisse pour éviter des erreurs si tu veux l’enlever plus tard
+    public Transform bulletSpawn;
+    public float shootingForce = 1000f;
+    public float fireRate = 0.2f;
+    public XRGrabInteractable grabInteractable;
 
     private XRInputActions inputActions;
     private bool isShooting = false;
@@ -75,7 +73,7 @@ public class GunShooting : MonoBehaviour
 
     void Shoot()
     {
-        // 🔥 Récupérer une balle du pool
+        //  Récupérer une balle du pool (Task 2 compatible)
         GameObject bullet = BulletPool.Instance.GetBullet();
 
         // Reset & repositionnement
@@ -88,15 +86,15 @@ public class GunShooting : MonoBehaviour
 
         bullet.SetActive(true);
 
-        // 🔥 FX Addressables (PCVR ou Quest automatiquement)
+        //  FX d'apparition du tir via Addressables
         Instantiate(
             FXLoader.Instance.GetMuzzleFX(),
             bulletSpawn.position,
             bulletSpawn.rotation,
-            bulletSpawn  // permet au FX de suivre le mouvement du canon
+            bulletSpawn
         );
 
-        // Force de tir
-        rb.AddForce(bulletSpawn.forward * shootingForce);
+        // Force de propulsion
+        rb.AddForce(bulletSpawn.forward * shootingForce, ForceMode.Impulse);
     }
 }
